@@ -36,7 +36,7 @@ class PrivateIngredientsApiTest(TestCase):
         )
         self.client.force_authenticate(self.user)
 
-    def test_retrive_ingredient_list(self):
+    def test_retrieve_ingredient_list(self):
         """Test retriening a list of ingredients"""
 
         Ingredient.objects.create(user=self.user, name='Kale')
@@ -50,9 +50,9 @@ class PrivateIngredientsApiTest(TestCase):
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data, serializer.data)
 
-    def ingredients_limited_to_user(self):
+    def test_ingredients_limited_to_user(self):
         """Test that ingredients for the authenticated are returned"""
-        user2 = get_user_model().objects.ctreare_user(
+        user2 = get_user_model().objects.create_user(
             'other@test.com',
             'superpasssviord'
         )
